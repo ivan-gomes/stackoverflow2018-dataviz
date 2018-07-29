@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<head>
+	<title>Stack Overflow 2018 Developer Survey - Language Popularity Narrative Visualization</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
+</head>
+<style>
+
+    .axis .domain {
+        display: none;
+    }
+
+</style>
+<div class="jumbotron p-2">
+    <div class="container">
+        <h1 class="jumbotron-heading">Stack Overflow 2018 Developer Survey</h1>
+        <p class="lead text-muted">The <a target="_blank" href="https://insights.stackoverflow.com/survey/2018/">survey</a> had over 100,000 developers answer questions about everything from their favorite technologies to their job preferences. What can it tell us about the current trends in programming languages?</p>
+        <button class="btn btn-primary my-2" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">About the Visualization</button>
+    </div>
+</div>
+<div class="container">
+    <div class="collapse my-4" id="collapseExample">
+        <div class="card">
+            <div class="card-header">
+                <span>About the Visualization</span>
+                <button type="button" class="close" aria-label="Close" data-toggle="collapse" data-target="#collapseExample">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="card-body">
+                <h5>Hybrid Structure</h5>
+                <div>This narrative visualization follows the martini glass structure that uses a hybrid of author-driven content followed by reader-driven content. The first four scenes both use annotations to point out observations and teach the user the navigations of the visualization one at a time. Finally the last scene enables all the filtering options and prompts the user to explore and identify their own trends.</div>
+
+                <div style="display: none">Does the narrative visualization correctly follow the hybrid structure as stated by the essay? The narrative visualization correctly follows the hybrid structure stated in the essay. The narrative visualization should follow one of the three hybrid structures: a martini glass, an interactive slideshow, or a drill down story.</div>
+                <div class="dropdown-divider"></div>
+                <h5>Scenes</h5>
+                <div>The visualization is presented as five scenes, each numbered and navigable as slides. The user can advance or go back with forward/previous buttons as well as navigate to any slide arbitrarily. All the scenes are laid out similarly with pagination, filters, text, and plot in the same location. When navigating from scene to scene, the plot transitions with bars growing and shrinking. The changed parameters flash subtly to cue the new values. The text narrative can be found in a summary box on the bottom left and with annotations that transition in after a delay to ease the user visually. Each scene resets all the parameters and annotations as needed so they work in both the ordered mode as well as when arbitrarily navigated to.</div>
+                
+                <div style="display: none">Does the narrative visualization effectively utilize scenes? The essay properly discusses the layout and design of the scenes of the narrative visualization. The scenes should follow a template for visual consistency, follow an order to best convey the message, and the essay should also discuss the layout and any visual structure in these scenes.</div>
+                <div class="dropdown-divider"></div>
+                <h5>Annotations</h5>
+            	<div>In addition to a summary of the data presented in a textbox for each scene, specific regions of the plots are highlighted by using annotations. The annotation consists of text, a line, and when applicable a circle around the highlighted region. The annotations are all stylistically similar, i.e. font size, text length, color, and size. The annotations fade in with delays to draw attention and fade out when the scene is changed.</div>
+
+                <div style="display: none">Does the narrative visualization effectively utilize annotations? The essay properly discusses the application of the annotations of the narrative visualization. The annotations should follow a template for visual consistency, should highlight specific data items or trends, and the essay should indicate when they are cleared.</div>
+                <div class="dropdown-divider"></div>
+                <h5>Parameters</h5>
+                <div>
+                <ul>
+                	<li><i>Country</i> is used to filter the survey respondents by their country of residence.</li>
+                	<li><i>Age</i> is used to filter the survey respondents by their age.</li>
+                	<li><i>Years Coding</i> is used to filter the survey respondents by the number of years they have been coding.</li>
+            	</ul>
+            	These parameters can be manipulated simultaneously to any combination on the fifth scene. In addition, the page number from 1 to 4 specifies the state of the visualization and results in pre-defined values for the other parameters. When any of these parameters are changed, the scene is updated to represent the new data.
+            	</div>
+
+                <div style="display: none">Does the narrative visualization effectively utilize parameters? The essay properly discusses the parameters of the narrative visualization, including describing which parameters control the current state of the narrative visualization. The parameters should be identified in the essay, which should also discuss the states of the narrative visualization.</div>
+                <div class="dropdown-divider"></div>
+                <h5>Triggers</h5>
+                <div>There are two types of triggers: scene navigation and parameter selection. The next/previous buttons and the 1-5 page buttons all change the scene that is currently displayed. Clicking (<i>onclick</i> event) any of these buttons sets the parameters to pre-defined values and updates the plot, annotations, and text narrative to match. On page 5 the drop down menus corresponding to the other parameters are enabled and changing (<i>change</i> event) them triggers the visualization to update with results matching the filters. The available controls are made known to the user by styling disabled options as greyed out and not interactable, while the active ones are colored and clickable. The flashes of the dropdown during the author-driven portion of the martini glass structure also draw attention to the drop down menus that are later enabled.</div>
+
+                <div style="display: none">Does the narrative visualization effectively utilize triggers? The essay properly discusses the triggers, including what user events trigger what parameter value changes, and how the viewer is aware of available user events. The triggers should also be identified in the essay, in terms of the events and the parameter changes they trigger. User interface events should be listed, along with a description of how possible user events are communicated to the viewer.</div>
+                <footer class="blockquote-footer" style="text-align: right;">Visualization created by <cite title="Ivan Gomes">Ivan Gomes</cite></footer>
+            </div>
+        </div>
+    </div>
+    <div class="row my-4" id="content">
+        <div class="col-lg-3">
+            <nav aria-label="Page navigation example">
+                <ul id="scene-pagination" class="pagination justify-content-center">
+                    <li id="scene-pagination-previous" class="page-item" onclick="previous(this)">
+                        <a class="page-link" href="#" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                    </li>
+                    <li class="page-item" data-page-number="1" onclick="goTo(1, this)"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item" data-page-number="2" onclick="goTo(2, this)"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item" data-page-number="3" onclick="goTo(3, this)"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item" data-page-number="4" onclick="goTo(4, this)"><a class="page-link" href="#">4</a></li>
+                    <li class="page-item" data-page-number="5" onclick="goTo(5, this)"><a class="page-link" href="#">5</a></li>
+                    <li id="scene-pagination-next" class="page-item" onclick="next(this)">
+                        <a class="page-link" href="#" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <form>
+                <div class="form-group">
+                    <label for="country-filter">Country</label>
+                    <select id="country-filter" class="filter form-control">
+                        <option value="All">All</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="age-filter">Age</label>
+                    <select id="age-filter" class="filter form-control">
+                        <option value="All">All</option>
+                        <option value="Under 18 years old">Under 18 years old</option>
+                        <option value="18 - 24 years old">18 - 24 years old</option>
+                        <option value="25 - 34 years old">25 - 34 years old</option>
+                        <option value="35 - 44 years old">35 - 44 years old</option>
+                        <option value="45 - 54 years old">45 - 54 years old</option>
+                        <option value="55 - 64 years old">55 - 64 years old</option>
+                        <option value="65 years or older">65 years or older</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="years-filter">Years Coding</label>
+                    <select id="years-filter" class="filter form-control">
+                        <option value="All">All</option>
+                        <option value="0-2 years">0-2 years</option>
+                        <option value="3-5 years">3-5 years</option>
+                        <option value="6-8 years">6-8 years</option>
+                        <option value="9-11 years">9-11 years</option>
+                        <option value="12-14 years">12-14 years</option>
+                        <option value="15-17 years">15-17 years</option>
+                        <option value="18-20 years">18-20 years</option>
+                        <option value="21-23 years">21-23 years</option>
+                        <option value="24-26 years">24-26 years</option>
+                        <option value="27-29 years">27-29 years</option>
+                        <option value="30 or more years">30 or more years</option>
+                    </select>
+                </div>
+            </form>
+            <div class="card">
+                <div id="scene-description" class="card-body">
+                </div>
+            </div>
+        </div>
+        <div id="chart-container" class="col-lg-9">
+            <svg width="700" height="660"></svg>
+        </div>
+    </div>
+</div>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
+<script>
+    var mapping = {
+        'country': 'Country',
+        'age': 'Age',
+        'years': 'YearsCoding'
+    };
+
+    function initForm(data) {
+        var select, options;
+
+        options = data.map(item => item['Country']
+    ).
+        filter((value, index, self) => self.indexOf(value) === index
+    ).
+        sort();
+        var index = options.indexOf('NA');
+        if (index > -1) {
+            options.splice(index, 1);
+        }
+        select = document.getElementById('country' + '-filter');
+        for (var i = 0; i < options.length; i++) {
+            var opt = document.createElement('option');
+            opt.value = options[i];
+            opt.innerHTML = options[i];
+            select.appendChild(opt);
+        }
+    }
+
+    function prepareData(data) {
+        var newData = [];
+        dataLoop:
+            for (var i = 0; i < data.length; i++) {
+                var languages = data[i]['LanguageWorkedWith'].split(';');
+                for (var key in mapping) {
+                    var filter = document.getElementById(key + '-filter');
+                    var filterValue = filter.options[filter.selectedIndex].value;
+                    if (typeof filterValue !== 'undefined' && filterValue !== 'All' && filterValue !== data[i][mapping[key]]) {
+                        continue dataLoop;
+                    }
+                }
+                for (var j = 0; j < languages.length; j++) {
+                    var language = languages[j];
+                    if (language === 'NA') {
+                        continue;
+                    }
+                    var newDatum = newData.find(function (d) {
+                        return d.name === language;
+                    });
+                    if (typeof newDatum === 'undefined') {
+                        newDatum = {'name': language, 'Student': 0, 'Professional': 0};
+                        newData.push(newDatum);
+                    }
+                    newDatum[data[i].Student === 'No' ? 'Professional' : 'Student']++;
+                }
+            }
+        for (var i = 0; i < newData.length; i++) {
+            newData[i].total = newData[i].Professional + newData[i].Student;
+        }
+        /*
+        newData.sort(function (a, b) {
+            return b.total - a.total;
+        });
+        */
+        return newData;
+    }
+
+    var svg = d3.select("svg"),
+        margin = {top: 20, right: 20, bottom: 30, left: 120},
+        width = +svg.attr("width") - margin.left - margin.right,
+        height = +svg.attr("height") - margin.top - margin.bottom,
+        g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+    var y = d3.scaleBand()			// x = d3.scaleBand()
+        .rangeRound([0, height])	// .rangeRound([0, width])
+        .paddingInner(0.05)
+        .align(0.1);
+
+    var x = d3.scaleLinear()		// y = d3.scaleLinear()
+        .rangeRound([0, width]);	// .rangeRound([height, 0]);
+
+    var z = d3.scaleOrdinal()
+        .range(["#98abc5", "#ff8c00"]);
+
+    var initialized = false;
+
+    function change() {
+        d3.csv("data/2018_survey_results_public.csv", function (data) {
+            return data;
+        }, function (error, data) {
+            if (error) throw error;
+
+            if (!initialized) {
+                initForm(data);
+                initialized = true;
+            }
+            data = prepareData(data);
+            data.sort(function(a, b) {
+                return d3.descending(a.total, b.total);
+            });
+
+            var keys = ['Student', 'Professional'];
+            //var keys = data.columns.slice(1);
+
+            y.domain(data.map(function (d) {
+                return d.name;
+            }));					// x.domain...
+            x.domain([0, d3.max(data, function (d) {
+                return d.total;
+            })]).nice();	// y.domain...
+            z.domain(keys);
+
+            select = g.select("#bars")
+                .selectAll("g")
+                .data(d3.stack().keys(keys)(data));
+            nestedSelect = select.enter().append("g").merge(select)
+                .attr("fill", function (d) {
+                    return z(d.key);
+                })
+                .selectAll("rect")
+                .data(function (d) {
+                    return d;
+                });
+            nestedSelect.enter().append("rect").merge(nestedSelect)
+                .transition().duration(1000)
+                .attr("y", function (d) {
+                    return y(d.data.name);
+                })	    //.attr("x", function(d) { return x(d.data.State); })
+                .attr("x", function (d) {
+                    return x(d[0]);
+                })			    //.attr("y", function(d) { return y(d[1]); })
+                .attr("width", function (d) {
+                    return x(d[1]) - x(d[0]);
+                })	//.attr("height", function(d) { return y(d[0]) - y(d[1]); })
+                .attr("height", y.bandwidth());  				    //.attr("width", x.bandwidth());
+
+            nestedSelect.exit().remove();
+
+
+
+            // y-axis
+            g.select("#y-axis")
+                .attr("class", "axis")
+                .attr("transform", "translate(0,0)") 						//  .attr("transform", "translate(0," + height + ")")
+                .call(d3.axisLeft(y))									//   .call(d3.axisBottom(x));
+                .append("text")
+                .attr("y", 2)												//     .attr("y", 2)
+                .attr("x", x(x.ticks().pop()) + 0.5) 						//     .attr("y", y(y.ticks().pop()) + 0.5)
+                .attr("dy", "0.32em")										//     .attr("dy", "0.32em")
+                .attr("fill", "#000")
+                .attr("font-weight", "bold")
+                .attr("text-anchor", "start")
+                .text("Languages")
+                .attr("transform", "translate(" + (-width-62) + ",-15)");   	// Newline
+
+            // x-axis
+            g.select("#x-axis")
+                .attr("class", "axis")
+                .attr("transform", "translate(0," + height + ")")				// New line
+                .call(d3.axisBottom(x).ticks(null, "s"))					//  .call(d3.axisLeft(y).ticks(null, "s"))
+                .append("text")
+                .attr("y", 2)												//     .attr("y", 2)
+                .attr("x", x(x.ticks().pop()) + 0.5) 						//     .attr("y", y(y.ticks().pop()) + 0.5)
+                .attr("dy", "0.32em")										//     .attr("dy", "0.32em")
+                .attr("fill", "#000")
+                .attr("font-weight", "bold")
+                .attr("text-anchor", "start")
+                .text("Developers")
+                .attr("transform", "translate(" + (-width) + ",24)");   	// Newline
+
+            // legend
+            var legend = g.select("#legend")
+                .attr("font-family", "Arial")
+                .attr("font-size", 10)
+                .attr("text-anchor", "end")
+                .selectAll("g")
+                .data(keys.slice().reverse())
+                .enter().append("g")
+                //.attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
+                .attr("transform", function (d, i) {
+                    return "translate(-50," + (550 + i * 20) + ")";
+                });
+
+            legend.append("rect")
+                .attr("x", width - 19)
+                .attr("width", 19)
+                .attr("height", 19)
+                .attr("fill", z);
+
+            legend.append("text")
+                .attr("x", width - 24)
+                .attr("y", 9.5)
+                .attr("dy", "0.32em")
+                .text(function (d) {
+                    return d;
+                });
+        });
+    }
+
+    g.append("g").attr("id", "bars");
+    g.append("g").attr("id", "y-axis");
+    g.append("g").attr("id", "x-axis");
+    g.append("g").attr("id", "legend");
+
+    var annotation1 = g.append("g").attr("id", "annotation1").classed("annotation", true).attr("display", "none").attr("transform", "translate(70, 88)");
+    annotation1.append("circle").attr("r", 16).attr("fill", "none").attr("stroke", "#34495e").attr("stroke-width", 2);
+    annotation1.append("line").attr("x1", 12).attr("y1", 12).attr("x2", 125).attr("y2", 125).attr("stroke", "#34495e");
+    var annotation1Text = annotation1.append("text").attr("x", 127).attr("y", 123).style("font-family", "Arial").style("font-size", "11px").attr("fill", "#34495e");
+    annotation1Text.append("tspan").attr("x", 127).attr('dy', 12).text("Looks like Bash/Shell is under-represented in students.");
+    annotation1Text.append("tspan").attr("x", 127).attr('dy', 12).text("Operating system level programming is in demand in industry,");
+    annotation1Text.append("tspan").attr("x", 127).attr('dy', 12).text("but perhaps curriculum is focused on more structured languages.");
+
+    var annotation2 = g.append("g").attr("id", "annotation2").classed("annotation", true).attr("display", "none").attr("transform", "translate(27, 232)");
+    annotation2.append("circle").attr("r", 16).attr("fill", "none").attr("stroke", "#34495e").attr("stroke-width", 2);
+    annotation2.append("line").attr("x1", 12).attr("y1", 12).attr("x2", 150).attr("y2", 150).attr("stroke", "#34495e");
+    var annotation2Text = annotation2.append("text").attr("x", 152).attr("y", 148).style("font-family", "Arial").style("font-size", "11px").attr("fill", "#34495e");
+    annotation2Text.append("tspan").attr("x", 152).attr('dy', 12).text("Assembly appears to be over-represented in students.");
+    annotation2Text.append("tspan").attr("x", 152).attr('dy', 12).text("This could be because it is used to teach how computers work");
+    annotation2Text.append("tspan").attr("x", 152).attr('dy', 12).text("at a low level, but it has narrow application in industry.");
+
+    var annotation3 = g.append("g").attr("id", "annotation3").classed("annotation", true).attr("display", "none").attr("transform", "translate(52, 104)");
+    annotation3.append("line").attr("x1", 50).attr("y1", 0).attr("x2", 150).attr("y2", 150).attr("stroke", "#34495e");
+    var annotation3Text = annotation3.append("text").attr("x", 152).attr("y", 148).style("font-family", "Arial").style("font-size", "11px").attr("fill", "#34495e");
+    annotation3Text.append("tspan").attr("x", 152).attr('dy', 12).text("Java is two ranks lower in the US, which could be indicative of");
+    annotation3Text.append("tspan").attr("x", 152).attr('dy', 12).text("a downward trend worldwide and is in line with its decreasing");
+    annotation3Text.append("tspan").attr("x", 152).attr('dy', 12).text("popularity relative to surveys of prior years.");
+
+    var annotation4 = g.append("g").attr("id", "annotation4").classed("annotation", true).attr("display", "none").attr("transform", "translate(30, 8)");
+    annotation4.append("line").attr("x1", 50).attr("y1", 0).attr("x2", 125).attr("y2", 175).attr("stroke", "#34495e");
+    var annotation4Text = annotation4.append("text").attr("x", 127).attr("y", 173).style("font-family", "Arial").style("font-size", "11px").attr("fill", "#34495e");
+    annotation4Text.append("tspan").attr("x", 127).attr('dy', 12).text("SQL jumps to the top among 55-65 year olds compared to fourth overall.");
+    annotation4Text.append("tspan").attr("x", 127).attr('dy', 12).text("Considering it was introduced 44 years ago and this generation");
+    annotation4Text.append("tspan").attr("x", 127).attr('dy', 12).text("matured the technology it makes sense that it  features prominently.");
+
+    var annotation5 = g.append("g").attr("id", "annotation5").classed("annotation", true).attr("display", "none").attr("transform", "translate(20, 8)");
+    annotation5.append("line").attr("x1", 50).attr("y1", 0).attr("x2", 125).attr("y2", 200).attr("stroke", "#34495e");
+    annotation5.append("line").attr("x1", 50).attr("y1", 14).attr("x2", 125).attr("y2", 200).attr("stroke", "#34495e");
+    var annotation5Text = annotation5.append("text").attr("x", 127).attr("y", 198).style("font-family", "Arial").style("font-size", "11px").attr("fill", "#34495e");
+    annotation5Text.append("tspan").attr("x", 127).attr('dy', 12).text("HTML and CSS gain in popularity over Javascript among beginners. Web design");
+    annotation5Text.append("tspan").attr("x", 127).attr('dy', 12).text("is a common choice to start learning with as there are many tutorials online,");
+    annotation5Text.append("tspan").attr("x", 127).attr('dy', 12).text("the results are easily visualized, and the barriers to entry are low.");
+
+    d3.selectAll(".filter")
+        .on("change", function () {
+            change();
+        });
+
+    function goTo(page, item) {
+        if (typeof item !== 'undefined' && $(item).hasClass('disabled')) {
+            return;
+        }
+        var scenePagination = $('#scene-pagination');
+        scenePagination.data("page-number", page);
+        scenePagination.find('.page-item').removeClass('active');
+        scenePagination.find('.page-item[data-page-number=' + page + ']').addClass('active');
+        $('#scene-pagination-previous').toggleClass('disabled', page === 1);
+        $('#scene-pagination-next').toggleClass('disabled', page === 5);
+
+        $('.annotation').fadeOut(1000);
+        var filters = $('.filter');
+        filters.prop('disabled', true);
+
+        var countryFilter = $('#country-filter');
+        var ageFilter = $('#age-filter');
+        var yearsFilter = $('#years-filter');
+        var sceneDescription = $('#scene-description');
+
+        countryFilter.val('All').change();
+        ageFilter.val('All').change();
+        yearsFilter.val('All').change();
+
+        switch (page) {
+            case 1:
+                sceneDescription.html('Using the results from the survey, this plot visualizes the popularity of the programming languages that the developers had done extensive work with in the past year. This view shows all the results, but the next ones will filter on developer country, age, and years coding of the respondents to gain insights on different demographics.');
+                setTimeout(function() {
+                    if (getCurrentPage() === 1) {
+                        $("#annotation1").fadeIn(1000);
+                    }
+                }, 2000);
+                setTimeout(function() {
+                    if (getCurrentPage() === 1) {
+                        $("#annotation2").fadeIn(1000);
+                    }
+                }, 4000);
+                break;
+            case 2:
+                sceneDescription.html('By filtering the respondents for those living in the United States it can be seen that the ratio of students to professionals is lower across all of the languages. This could be attributed to a high demand for programming in the workplace, fewer programs for formal education, or more opportunities to train on the job.');
+                setTimeout(function() {
+                    if (getCurrentPage() === 2) {
+                        $("#annotation3").fadeIn(1000);
+                    }
+                }, 2000);
+                countryFilter.val('United States').change();
+                countryFilter.fadeTo(500, 0.3, function() { $(this).fadeTo(500, 1.0); });
+                break;
+            case 3:
+                sceneDescription.html('The 55-65 year old demographic represents the senior developer community who likely leads teams and projects. To put it into perspective, this generation possibly starting programming with IBM\'s first personal computer in 1981. Try switching between scenes to see if you can identify some more mature languages that gain in popularity.');
+                setTimeout(function() {
+                    if (getCurrentPage() === 3) {
+                        $("#annotation4").fadeIn(1000);
+                    }
+                }, 2000);
+                ageFilter.val('55 - 64 years old').change();
+                ageFilter.fadeTo(500, 0.3, function() { $(this).fadeTo(500, 1.0); });
+                break;
+            case 4:
+                sceneDescription.html('Those with 0-2 years of coding experience provide insight into which languages are used by beginners. This demographic naturally has a higher percentage of students relative to professionals. Although certain languages move a few ranks, the breakdown is similar to that of all respondents indicating that the industry demand should be met.');
+                setTimeout(function() {
+                    if (getCurrentPage() === 4) {
+                        $("#annotation5").fadeIn(1000);
+                    }
+                }, 2000);
+                yearsFilter.val('0-2 years').change();
+                yearsFilter.fadeTo(500, 0.3, function() { $(this).fadeTo(500, 1.0); });
+                break;
+            case 5:
+                sceneDescription.html('Change the <i>Country</i>, <i>Age</i>, and <i>Years Coding</i> parameters yourself to identify more trends in programming language popularity. <br /><br /><br /><br /><br />For example, why do you think Java is the most popular language in China among beginners?');
+                countryFilter.val('China').change();
+                yearsFilter.val('0-2 years').change();
+                filters.prop('disabled', false);
+                break;
+        }
+
+        change();
+    }
+
+    function previous(item) {
+        var scenePagination = $('#scene-pagination');
+        var goToPage = parseInt(scenePagination.data("page-number")) - 1;
+        goTo(goToPage, item);
+    }
+
+    function next(item) {
+        var scenePagination = $('#scene-pagination');
+        var goToPage = parseInt(scenePagination.data("page-number")) + 1;
+        goTo(goToPage, item);
+    }
+
+    function getCurrentPage() {
+        return $('#scene-pagination').data("page-number");
+    }
+
+    goTo(1);
+</script>
